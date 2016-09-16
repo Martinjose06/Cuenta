@@ -5,8 +5,6 @@
  */
 package clases;
 
-import javafx.scene.control.ButtonBar;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,133 +13,74 @@ import javax.swing.JOptionPane;
 
 public class Cuenta {
 
-    private int numerodecuenta;
-    private int identificacion;
-    private long saldoactual ;
-    private double interesanual;
-    
-    
-    
+    private long numero_cuenta;
+    private long numero_identificacion;
+    private double saldo_actual;
 
-    public Cuenta(int numerodecuenta, int identificacion, long saldoactual, double interesanual) {
-        this.numerodecuenta = numerodecuenta;
-        this.identificacion = identificacion;
-        this.saldoactual = saldoactual;
-        this.interesanual = interesanual;
-
+    public Cuenta(long numero_cuenta, long numero_identificacion, double saldo_actual) {
+        this.numero_cuenta = numero_cuenta;
+        this.numero_identificacion = numero_identificacion;
+        this.saldo_actual = saldo_actual;
+    }
+    
+    
+    public Cuenta(long numero_cuenta, long numero_identifacion){
+        this.numero_cuenta=numero_cuenta;
+        this.numero_identificacion=numero_identifacion;
+        this.saldo_actual=0;
     }
 
+    public long getNumero_cuenta() {
+        return numero_cuenta;
+    }
+
+    public void setNumero_cuenta(long numero_cuenta) {
+        this.numero_cuenta = numero_cuenta;
+    }
+
+    public long getNumero_identificacion() {
+        return numero_identificacion;
+    }
+
+    public void setNumero_identificacion(long numero_identificacion) {
+        this.numero_identificacion = numero_identificacion;
+    }
+
+    public double getSaldo_actual() {
+        return saldo_actual;
+    }
+
+    public void setSaldo_actual(double saldo_actual) {
+        this.saldo_actual = saldo_actual;
+    }
    
-    public int getNumerodecuenta() {
-        return numerodecuenta;
+    public void actulizarSaldo(double ian){
+        double aux, aux2;
+        aux = this.getSaldo_actual()*(ian/365);
+        aux2 = this.getSaldo_actual() + aux;
+        this.setSaldo_actual(aux2);
     }
-
-    public void setNumerodecuenta(int numerodecuenta) {
-        this.numerodecuenta = numerodecuenta;
-    }
-
-    public int getIdentificacion() {
-        return identificacion;
-    }
-
-    public void setIdentificacion(int identificacion) {
-        this.identificacion = identificacion;
-    }
-
-    public long getSaldoactual() {
-        return saldoactual;
-    }
-
-    public void setSaldoactual(long saldoactual) {
-        this.saldoactual = saldoactual;
-    }
-
-    public double getInteresanual() {
-        return interesanual;
-    }
-
-    public void setInteresanual(double interesanual) {
-        this.interesanual = interesanual;
-    }
-
     
-
-    public Cuenta ingresar() {
-        int n2, n3, n5,n1;
-        double n4;
-        int h;
-        int sw = 1;
-        Cuenta c;
-        
-        do{
-        String n = JOptionPane.showInputDialog(null, "Ingrese La Cantidad De Dinero");
-        n1 = (int) (this.saldoactual + Integer.parseInt(n));
-        this.saldoactual =  n1;
-        h = Helper.mensaje(null, "¿Desea Volver A Ingresar Dinero?","Ingresar",3);
-            if (h == 0) {
-                sw = 0;
-            }
-            else{
-                sw = 1;
-            }
-        } while (sw == 0);
-        
-        n2 = this.identificacion;
-        n3 = this.numerodecuenta;
-        n4 = this.interesanual;
-        
-        
-        
-        c = new Cuenta(n3, n2, saldoactual, n4);
-        return c;
-        
-    }
-
-    public Cuenta retirar() {
-        int n2, n3, n5,n1;
-        double n4;
-        Cuenta c;
-        int h;
-        int sw = 1;
-        
-        
-        do{
-        String n = JOptionPane.showInputDialog(null, "Ingrese La Cantidad Que Desea Extraer");
-        n1 = (int) (this.saldoactual - Integer.parseInt(n));
-        h = Helper.mensaje(null, "¿Desea Volver A Extraer Dinero?","Ingresar",3);
-            if (h == 0) {
-                sw = 0;
-            }
-            else{
-                sw = 1;
-            }
-        } while (sw == 0); 
-        
-        n2 = this.identificacion;
-        n3 = this.numerodecuenta;
-        n4 = this.interesanual;
-        this.saldoactual = n1;
-
-        c = new Cuenta(n3, n2,saldoactual, n4);
-        return c;
-
-    }
-
-     public Cuenta actualizarsaldo() {
-        int n2, n3, n5,n1;
-        double n4;
-        Cuenta c;
-
-        
-        saldoactual = (int) (this.saldoactual + (this.saldoactual * (this.interesanual / 365))) ;    
-        
-        n2 = this.identificacion;
-        n3 = this.numerodecuenta;
-        n4 = this.interesanual;
-
-        c = new Cuenta(n3, n2,saldoactual, n4);
-        return c;
-
-    }
+   public void ingresar(double ingreso){
+       double aux;
+       aux=this.getSaldo_actual()+ingreso;
+       this.setSaldo_actual(aux);
+   }
+   
+   public void retirar(double egreso){
+       double aux;
+       aux = this.getSaldo_actual() - egreso;
+       this.setSaldo_actual(aux);
+       
+   }
+   
+   public String mostrar(){
+       String aux;
+       aux = "No. de la cuenta: "+this.getNumero_cuenta()+"\n"
+           + "No. de Identificación: "+this.getNumero_identificacion()+"\n"
+           + "Saldo Actual: "+this.getSaldo_actual();
+        return aux;
+              
+   }
     
 }

@@ -10,16 +10,24 @@ package interfaz;
  * @author LUCYLEONOR
  */
 import clases.*;
+import javax.swing.JOptionPane;
+
 public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
      */
-    
-    Cuenta c1,c2 = null;
+    Cuenta c;
+
     public Principal() {
         initComponents();
+        txtInteresAnual.setEnabled(false);
         cmdMostrar.setEnabled(false);
+        cmdActualizarSaldo.setEnabled(false);
+        txtIngreso.setEnabled(false);
+        txtEgreso.setEnabled(false);
+        cmdIngresar.setEnabled(false);
+        cmdRetirar.setEnabled(false);
     }
 
     /**
@@ -40,16 +48,21 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtResultado = new javax.swing.JTextArea();
-        cmbOp = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
-        cmdCalcular = new javax.swing.JButton();
         cmdLimpiar = new javax.swing.JButton();
+        cmdCrear = new javax.swing.JButton();
         cmdMostrar = new javax.swing.JButton();
         cmdActualizarSaldo = new javax.swing.JButton();
+        cmdIngresar = new javax.swing.JButton();
+        cmdRetirar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtSaldo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtInteresAnual = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtIngreso = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtEgreso = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cuenta");
@@ -86,27 +99,17 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtResultado.setEditable(false);
         txtResultado.setColumns(20);
         txtResultado.setRows(5);
         jScrollPane1.setViewportView(txtResultado);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 17, 420, 160));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 440, 190));
-
-        cmbOp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingresar Saldo", "Retirar" }));
-        jPanel1.add(cmbOp, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 150, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 440, 190));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Optiones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        cmdCalcular.setText("Efectuar Opcion");
-        cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdCalcularActionPerformed(evt);
-            }
-        });
-        jPanel3.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 120, -1));
 
         cmdLimpiar.setText("Limpiar");
         cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +117,15 @@ public class Principal extends javax.swing.JFrame {
                 cmdLimpiarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 120, -1));
+        jPanel3.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 120, -1));
+
+        cmdCrear.setText("Crear Cuenta");
+        cmdCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCrearActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmdCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 120, -1));
 
         cmdMostrar.setText("Mostrar");
         cmdMostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +133,7 @@ public class Principal extends javax.swing.JFrame {
                 cmdMostrarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 120, -1));
+        jPanel3.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 120, -1));
 
         cmdActualizarSaldo.setText("Actualizar Saldo");
         cmdActualizarSaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -130,9 +141,25 @@ public class Principal extends javax.swing.JFrame {
                 cmdActualizarSaldoActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdActualizarSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 120, -1));
+        jPanel3.add(cmdActualizarSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 120, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 140, 220));
+        cmdIngresar.setText("Ingresar");
+        cmdIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdIngresarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmdIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 120, -1));
+
+        cmdRetirar.setText("Retirar");
+        cmdRetirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdRetirarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmdRetirar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 120, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 140, 320));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("Saldo Actual");
@@ -147,114 +174,56 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Interes Anual");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
+        jPanel1.add(txtInteresAnual, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 80, -1));
 
-        txtInteresAnual.addKeyListener(new java.awt.event.KeyAdapter() {
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel6.setText("Ingreso");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        txtIngreso.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtInteresAnualKeyTyped(evt);
+                txtIngresoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtInteresAnual, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 80, -1));
+        jPanel1.add(txtIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 100, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 480));
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel7.setText("Egreso");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, -1, -1));
 
-        setSize(new java.awt.Dimension(654, 519));
+        txtEgreso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEgresoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtEgreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 100, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 440));
+
+        setSize(new java.awt.Dimension(675, 494));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
-
-        if (txtIdentificacion.getText().trim().isEmpty() && txtNumeroDeCuenta.getText().trim().isEmpty() && txtSaldo.getText().trim().isEmpty() && txtInteresAnual.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese Los Datos","Error",2);
-            txtNumeroDeCuenta.requestFocusInWindow();
-        }
-        else if (txtIdentificacion.getText().trim().isEmpty()) {
-             Helper.mensaje(this, "Ingrese El Numero De Identificacion","Error",2);
-            txtIdentificacion.requestFocusInWindow();
-        }
-        else if (txtNumeroDeCuenta.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Numero De Cuenta","Error",2);
-            txtNumeroDeCuenta.requestFocusInWindow();
-        }
-        else if (txtSaldo.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Saldo Actual De La Cuenta","Error",2);
-            txtSaldo.requestFocusInWindow();
-        }
-        else if (txtInteresAnual.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Interes Anual De La Cuenta","Error",2);
-            txtInteresAnual.requestFocusInWindow();
-        }
-        else{
-        txtResultado.setText("");
-        int op, identificacion,cuenta;
-        long saldo;
-        int interes;
-        identificacion = Integer.parseInt(txtIdentificacion.getText());
-        cuenta = Integer.parseInt(txtNumeroDeCuenta.getText());
-        saldo =  Long.parseLong(txtSaldo.getText());
-        interes = Integer.parseInt(txtInteresAnual.getText());
-       
-        op = cmbOp.getSelectedIndex();
-      
-        c1 = new Cuenta (cuenta,identificacion,saldo,interes);
-         
-        
-        switch (op){
-            case 0:
-            c2 = c1.ingresar().actualizarsaldo();
-            break;
-            case 1:
-            c2 = c1.retirar().actualizarsaldo();
-            break;
-            
-        }
-        
-        }
-    }//GEN-LAST:event_cmdCalcularActionPerformed
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
 
         txtIdentificacion.setText("");
-        txtInteresAnual.setText("");
         txtNumeroDeCuenta.setText("");
         txtResultado.setText("");
         txtSaldo.setText("");
-        cmdActualizarSaldo.setEnabled(true);
+        txtInteresAnual.setText("");
+        txtIngreso.setText("");
+        txtEgreso.setText("");
+        txtInteresAnual.setEnabled(false);
+        txtIdentificacion.setEditable(true);
+        txtNumeroDeCuenta.setEditable(true);
+        txtSaldo.setEditable(true);
+        cmdMostrar.setEnabled(false);
+        cmdCrear.setEnabled(false);
+         txtIngreso.setEnabled(false);
+        txtEgreso.setEnabled(false);
         txtNumeroDeCuenta.requestFocusInWindow();
     }//GEN-LAST:event_cmdLimpiarActionPerformed
-
-    private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
-
-        if (txtIdentificacion.getText().trim().isEmpty() && txtNumeroDeCuenta.getText().trim().isEmpty() && txtSaldo.getText().trim().isEmpty() && txtInteresAnual.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese Los Datos","Error",2);
-            txtNumeroDeCuenta.requestFocusInWindow();
-        }
-        else if (txtIdentificacion.getText().trim().isEmpty()) {
-             Helper.mensaje(this, "Ingrese El Numero De Identificacion","Error",2);
-            txtIdentificacion.requestFocusInWindow();
-        }
-        else if (txtNumeroDeCuenta.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Numero De Cuenta","Error",2);
-            txtNumeroDeCuenta.requestFocusInWindow();
-        }
-        else if (txtSaldo.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Saldo Actual De La Cuenta","Error",2);
-            txtSaldo.requestFocusInWindow();
-        }
-        else if (txtInteresAnual.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Interes Anual De La Cuenta","Error",2);
-            txtInteresAnual.requestFocusInWindow();
-        }
-        else {
-        txtResultado.setText("");
-        txtResultado.append("Identificacion: " + c2.getIdentificacion() + "\n"
-                + "Numero De Cuenta: " + c2.getNumerodecuenta() + "\n"
-                + "Saldo Actual: " + c2.getSaldoactual() + "\n"
-                + "Interes Anual: " + c2.getInteresanual());
-        }
-        cmdActualizarSaldo.setEnabled(true);
-
-    }//GEN-LAST:event_cmdMostrarActionPerformed
 
     private void txtNumeroDeCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDeCuentaKeyTyped
         char c = evt.getKeyChar();
@@ -276,16 +245,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtSaldoKeyTyped
 
-    private void txtInteresAnualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInteresAnualKeyTyped
-       char c = evt.getKeyChar();
-
-        if (!Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-
-        }
-    }//GEN-LAST:event_txtInteresAnualKeyTyped
-
     private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
         char c = evt.getKeyChar();
 
@@ -296,52 +255,170 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtIdentificacionKeyTyped
 
-    private void cmdActualizarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActualizarSaldoActionPerformed
+    private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
 
         if (txtIdentificacion.getText().trim().isEmpty() && txtNumeroDeCuenta.getText().trim().isEmpty() && txtSaldo.getText().trim().isEmpty() && txtInteresAnual.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese Los Datos","Error",2);
+            Helper.mensaje(this, "Ingrese Los Datos", "Error", 2);
             txtNumeroDeCuenta.requestFocusInWindow();
-        }
-        else if (txtIdentificacion.getText().trim().isEmpty()) {
-             Helper.mensaje(this, "Ingrese El Numero De Identificacion","Error",2);
+        } else if (txtIdentificacion.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Ingrese El Numero De Identificacion", "Error", 2);
             txtIdentificacion.requestFocusInWindow();
-        }
-        else if (txtNumeroDeCuenta.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Numero De Cuenta","Error",2);
+        } else if (txtNumeroDeCuenta.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Ingrese El Numero De Cuenta", "Error", 2);
             txtNumeroDeCuenta.requestFocusInWindow();
-        }
-        else if (txtSaldo.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Saldo Actual De La Cuenta","Error",2);
+        } else if (txtSaldo.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Ingrese El Saldo Actual De La Cuenta", "Error", 2);
             txtSaldo.requestFocusInWindow();
-        }
-        else if (txtInteresAnual.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Ingrese El Interes Anual De La Cuenta","Error",2);
-            txtInteresAnual.requestFocusInWindow();
-        }
-        else {
-        int op, identificacion,cuenta;
-        long saldo;
-        int interes;
-        identificacion = Integer.parseInt(txtIdentificacion.getText());
-        cuenta = Integer.parseInt(txtNumeroDeCuenta.getText());
-        saldo =  Long.parseLong(txtSaldo.getText());
-        interes = Integer.parseInt(txtInteresAnual.getText());
-       
-        op = cmbOp.getSelectedIndex();
-      
-        c1 = new Cuenta (cuenta,identificacion,saldo,interes);
+        } else {
+            txtResultado.setText("");
+            int op, sw = 1;
+            long cuenta = 0, identificacion = 0;
+            double saldo;
+            try {
+                identificacion = Long.parseLong(txtIdentificacion.getText());
+            } catch (NumberFormatException e) {
+                Helper.mensaje(this, "Solo Se Permite Un Limite de 18 Digitos En La Identificacion", "Error", 2);
+                sw = 0;
+            }
+            try {
+                cuenta = Long.parseLong(txtNumeroDeCuenta.getText());
+            } catch (NumberFormatException e) {
+                Helper.mensaje(this, "Solo Se Permite Un Limite de 18 Digitos En El Numero De cuenta", "Error", 2);
+                sw = 0;
+            }
+            if (sw == 1) {
 
-        c2 = c1.actualizarsaldo();
-        txtResultado.setText("");
-        txtResultado.append("Identificacion: " + c2.getIdentificacion() + "\n"
-                + "Numero De Cuenta: " + c2.getNumerodecuenta() + "\n"
-                + "Saldo Actual: " + c2.getSaldoactual() + "\n"
-                + "Interes Anual: " + c2.getInteresanual());
-        cmdActualizarSaldo.setEnabled(false);
+                saldo = Double.parseDouble(txtSaldo.getText());
+
+                c = new Cuenta(cuenta, identificacion, saldo);
+                Helper.mensaje(this, "Cuenta Creada Satisfactoriamente, su saldo actual es: "+c.getSaldo_actual(), "Cuenta Creada", 1);
+
+                txtInteresAnual.setEnabled(true);
+                txtIdentificacion.setEditable(false);
+                txtNumeroDeCuenta.setEditable(false);
+                txtSaldo.setEditable(false);
+                cmdCrear.setEnabled(false);
+                cmdActualizarSaldo.setEnabled(true);
+                cmdMostrar.setEnabled(false);
+            }
         }
-        
-        cmdMostrar.setEnabled(true);
+    }//GEN-LAST:event_cmdCrearActionPerformed
+
+    private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
+
+        txtResultado.setText("");
+        String aux;
+        aux = c.mostrar();
+        txtResultado.append(aux);
+        cmdMostrar.setEnabled(false);
+
+    }//GEN-LAST:event_cmdMostrarActionPerformed
+
+    private void cmdActualizarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActualizarSaldoActionPerformed
+
+        txtResultado.setText("");
+        double ian = 0, sw = 1;
+        if (txtInteresAnual.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Ingrese El Interes Anual", "Error", 2);
+            txtInteresAnual.requestFocusInWindow();
+        } else {
+            try {
+                ian = Double.parseDouble(txtInteresAnual.getText());
+            } catch (NumberFormatException e) {
+                Helper.mensaje(this, "Ingrese Un Dato Valido", "Error", 2);
+                txtInteresAnual.requestFocusInWindow();
+                txtInteresAnual.selectAll();
+                sw = 0;
+            }
+            if (sw == 1) {
+
+                c.actulizarSaldo(ian);
+                cmdMostrar.setEnabled(true);
+                txtIngreso.setEnabled(true);
+                txtEgreso.setEnabled(true);
+                cmdIngresar.setEnabled(true);
+                cmdRetirar.setEnabled(true);
+            }
+        }
     }//GEN-LAST:event_cmdActualizarSaldoActionPerformed
+
+    private void cmdRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRetirarActionPerformed
+
+        txtResultado.setText("");
+        if (txtEgreso.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Ingrese el dinero a retirar", "Error", 2);
+            txtEgreso.requestFocusInWindow();
+        } else if (c.getSaldo_actual() == 0) {
+            Helper.mensaje(this, "Usted no tiene saldo", "Error", 2);
+            txtEgreso.requestFocusInWindow();
+            txtEgreso.selectAll();
+        } else if (Integer.parseInt(txtEgreso.getText()) > c.getSaldo_actual()) {
+            Helper.mensaje(this, "Fondos insuficientes", "Error", 2);
+            txtEgreso.requestFocusInWindow();
+            txtEgreso.selectAll();
+        } else {
+
+            int Egreso, res, sw = 1;
+            Egreso = Integer.parseInt(txtEgreso.getText());
+            res = Helper.mensaje(this, "¿Desea retirar " + Egreso + "$" + " de su cuenta?", "Retiro", 3);
+            if (res == 0) {
+                sw = 1;
+            } else {
+                sw = 0;
+            }
+            if (sw == 1) {
+                c.retirar(Egreso);
+                Helper.mensaje(this, "Usted retiro: " + Egreso + "$" + "\nSu nuevo saldo es: " + c.getSaldo_actual() + "$", "Saldo Actual", 1);
+                txtEgreso.setText("");
+            }
+        }
+
+    }//GEN-LAST:event_cmdRetirarActionPerformed
+
+    private void cmdIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdIngresarActionPerformed
+
+        txtResultado.setText("");
+        if (txtIngreso.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Ingrese el dinero a consignar", "Error", 2);
+            txtIngreso.requestFocusInWindow();
+        } else {
+            int Ingreso, sw = 1, res;
+            Ingreso = Integer.parseInt(txtIngreso.getText());
+            res = Helper.mensaje(this, "¿Desea ingresar " + Ingreso + "$" + " a su cuenta?", "Ingreso", 3);
+            if (res == 0) {
+                sw = 1;
+            } else {
+                sw = 0;
+            }
+            if (sw == 1) {
+                c.ingresar(Ingreso);
+                Helper.mensaje(this, "Usted ingresó: " + Ingreso + "$" + "\nSu nuevo saldo es: " + c.getSaldo_actual() + "$", "Saldo Actual", 1);
+                txtIngreso.setText("");
+            }
+        }
+
+
+    }//GEN-LAST:event_cmdIngresarActionPerformed
+
+    private void txtIngresoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIngresoKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtIngresoKeyTyped
+
+    private void txtEgresoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEgresoKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_txtEgresoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -379,21 +456,26 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbOp;
     private javax.swing.JButton cmdActualizarSaldo;
-    private javax.swing.JButton cmdCalcular;
+    private javax.swing.JButton cmdCrear;
+    private javax.swing.JButton cmdIngresar;
     private javax.swing.JButton cmdLimpiar;
     private javax.swing.JButton cmdMostrar;
+    private javax.swing.JButton cmdRetirar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtEgreso;
     private javax.swing.JTextField txtIdentificacion;
+    private javax.swing.JTextField txtIngreso;
     private javax.swing.JTextField txtInteresAnual;
     private javax.swing.JTextField txtNumeroDeCuenta;
     private javax.swing.JTextArea txtResultado;

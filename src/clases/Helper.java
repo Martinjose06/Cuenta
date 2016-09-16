@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
  * @author LUCYLEONOR
  */
 public class Helper {
-     public static int mensaje(Component ventana, String info, String titulo, int tipo) {
+
+    public static int mensaje(Component ventana, String info, String titulo, int tipo) {
         int retorno = -1;
         switch (tipo) {
             case 1:
@@ -22,11 +23,13 @@ public class Helper {
             case 2:
                 JOptionPane.showMessageDialog(ventana, info, titulo, JOptionPane.ERROR_MESSAGE);
                 break;
-           
+
             case 3:
                 retorno = JOptionPane.showConfirmDialog(ventana, info, titulo, JOptionPane.YES_NO_OPTION);
                 break;
+
+            
         }
         return retorno;
-     }
+    }
 }
